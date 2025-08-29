@@ -10,13 +10,60 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
-
+  build-and-test-x64:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
+      - uses: actions/checkout@v5
+
+      # 安装 Rust nightly
+      - name: Set up Rust nightly
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly
+          components: rustfmt, clippy
+          targets: x86_64-unknown-linux-gnu
+
+      # 构建
+      - name: Build
+        run: cargo build --release --verbose --target x86_64-unknown-linux-gnu
+
+      # 测试
+      - name: Run tests
+        run: cargo test --verbose --target x86_64-unknown-linux-gnu
+
+      # 安装 tarpaulin
+      - name: Install tarpaulin
+        run: cargo install cargo-tarpaulin
+
+      # 生成覆盖率报告
+      - name: Run coverage
+        run: |
+          cargo tarpaulin --ignore-tests --out Xml --output-dir coverage
+
+      # 上传覆盖率报告
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+
+  build-and-test-arm64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      # 安装 Rust nightly
+      - name: Set up Rust nightly
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly
+          components: rustfmt, clippy
+          targets: aarch64-unknown-linux-gnu
+
+      # 构建
+      - name: Build
+        run: cargo build --release --verbose --target aarch64-unknown-linux-gnu
+
+      # 测试
+      - name: Run tests
+        run: cargo test --verbose --target aarch64-unknown-linux-gnu

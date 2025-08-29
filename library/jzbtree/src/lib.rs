@@ -1,5 +1,5 @@
 use std::any::Any;
-use std::cell::RefCell;
+use std::cell::{Ref, RefCell};
 use std::collections::HashMap;
 use std::ops::Deref;
 use std::sync::Arc;
@@ -13,9 +13,11 @@ impl BlackboardPtr {
     pub fn new() -> Self {
         BlackboardPtr(Arc::new(RefCell::new(HashMap::new())))
     }
-    pub fn get<T: 'static>(&self, key: &str) -> Option<&T> {
-		let borrow = self.0.borrow();
-        borrow.get(key)?.downcast_ref::<T>()
+    pub fn get<'a, T: 'static>(&'a self, key: &str) -> Option<Ref<'a, T>> {
+         Ref::filter_map(self.borrow(), |map| {
+            map.get(key)?.downcast_ref::<T>()
+        })
+        .ok()
     }
 }
 

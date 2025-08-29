@@ -32,7 +32,7 @@ impl Node for PrintNode {
     fn update(&mut self) -> Status {
         println!("PrintNode says: {}", self.msg);
         self.get_blackboard().unwrap().borrow_mut().insert("last_message".to_string(), Box::new("sdsdsd".to_string()));
-        self.get_blackboard().unwrap().borrow_mut().insert("tow_message".to_string(), Box::new(23232));
+        self.get_blackboard().unwrap().borrow_mut().insert("tow_message".to_string(), Box::new("zxczxc"));
         Status::Success
     }
 }
@@ -48,7 +48,7 @@ fn main() {
     root.set_blackboard(bb);
     // 执行 tick
     let status = root.tick();
-    println!("bb = {:?}", root.get_blackboard().unwrap().borrow()["last_message"].downcast_ref::<String>());
-    println!("bb = {:?}", root.get_blackboard().unwrap().borrow()["tow_message"].downcast_ref::<i32>());
+    println!("bb = {:?}", root.get_blackboard().unwrap().get::<String>("last_message").unwrap());
+    println!("bb = {:?}", root.get_blackboard().unwrap().get::<&str>("tow_message").unwrap());
     println!("Root status = {:?}", status);
 }
