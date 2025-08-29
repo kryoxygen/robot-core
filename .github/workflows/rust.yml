@@ -11,7 +11,7 @@ env:
 
 jobs:
   build-and-test-x64:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
 
@@ -48,7 +48,7 @@ jobs:
           path: coverage/
 
   build-and-test-arm64:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     steps:
       - uses: actions/checkout@v5
 
