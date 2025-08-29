@@ -1,0 +1,24 @@
+[package]
+name = "jzlog"
+version = "0.2.15"
+edition = "2024"
+
+[features]
+default = ["random_drop"]
+tsc = ["minstant", "once_cell"]
+random_drop = ["fastrand"]
+
+[dependencies]
+crossbeam-channel = "0.5.0"
+hashbrown = "0.14"
+arc-swap = "1"
+nohash-hasher = "0.2"
+typed-builder = "0.16"
+log = { version = "0.4", features = ["std", "kv_unstable"] }
+fastrand = { version = "2", optional = true }
+time = { version = "0.3", features = ["local-offset", "formatting"] }
+minstant = { version = "0.1", optional = true }
+once_cell = { version = "1", optional = true }
+
+[target.'cfg(target_family = "unix")'.dependencies]
+tz-rs = "0.7"
