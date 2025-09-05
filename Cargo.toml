@@ -1,0 +1,14 @@
+[workspace]
+resolver = "3"
+members = ["robot-core"]
+
+[workspace.dependencies]
+jzlog = { path = "library/jzlog" }
+jzbtree = { path = "library/jzbtree" }
+
+# 外部依赖
+serde = "1.0"
+serde_yaml = "0.9"
+tokio = "1.0"
+nix = "0.30"
+libloading = "0.8"

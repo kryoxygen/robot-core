@@ -1,0 +1,7 @@
+target/
+log/
+build/
+install/
+.cache/
+.vscode/
+*.log

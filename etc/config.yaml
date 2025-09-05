@@ -1,0 +1,82 @@
+server:
+  host: "127.0.0.1"
+  port: 8080
+database:
+  user: "admin"
+  password: "secret"
+  pool_size: 5
+
+laser:
+  '0':
+    # 基本信息
+    name: wj_wlr718n/back
+    name_compatible: /jzhw/laser/wj_wlr718n/back
+    type: wj_wlr718n
+    position: back
+    purpose: nav
+    features: nav,back,2d
+    platform: -1
+
+    # 坐标系
+    base_frame_id: laser_link
+    frame_id: laser_link2
+
+    # 网络连接
+    connect_type: 1
+    laser_ip: 192.168.217.201
+    laser_port: 2110
+    local_addr: ""
+    local_device: ""
+
+    # 扫描参数
+    angle_min: -85
+    angle_max: 85
+    angle_increment: 0.5
+    angle_resolution: 0.33
+    scan_frequency: 1
+    intensity: false
+    inverted: false
+
+    # 有效测距
+    min_range: 0.05
+    max_range: 30
+
+    # 位姿（机械安装设计/标定值）
+    calib_param:
+      px: -0.8707050744840171
+      py: -0.010321135829173201
+      pz: 0
+      roll: 0
+      pitch: 0
+      yaw: -3.1167332352945563
+
+    # ROS 话题
+    topic: /scan_emma_nav_back
+
+camera:
+  - id: 1
+    enable: true
+    type: "ast"
+    name: "Camera A"
+    position: "front"
+    frame_id: "cam_front"
+    topic: "/camera_front"
+    others: ["param1", "param2"]
+    # ip: 127.0.0.1
+    # enable_depth: true
+    # depth_fps: 30
+    # depth_height: "1080"
+    # depth_width: "1920"
+    # enable_color: true
+    # color_fps: 30
+    # color_height: "1080"
+    # color_width: "1920"
+    # enable_ir: false
+    # ir_fps: 0
+
+  - id: 2
+    enable: false
+    type: "RGB-D"
+    name: "Camera A"
+    position: "front"
+    frame_id: "cam_front"

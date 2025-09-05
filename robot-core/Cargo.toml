@@ -1,0 +1,14 @@
+[package]
+name = "robot-core"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+jzlog = { workspace = true }
+jzbtree = {workspace = true }
+
+nix = {workspace = true, features = ["signal","sched"] }
+serde = { workspace = true, features = ["derive"] }
+tokio = { workspace = true, features = ["rt","macros","time","process","io-std","io-util","rt-multi-thread"] }
+serde_yaml = { workspace = true }
+libloading = { workspace = true }
