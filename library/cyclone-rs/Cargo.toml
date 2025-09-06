@@ -1,0 +1,16 @@
+[package]
+name = "cyclone-rs"
+version = "0.1.0"
+edition = "2024"
+
+# [dependencies]
+
+[build-dependencies]
+cc = "*"
+pkg-config = "0.3"
+bindgen = "0.72"   # 用于自动生成 Rust FFI 绑定
+cmake = "0.1"      # 如果需要使用 CMake 构建 CycloneDDS，可以添加这个依赖
+
+[dependencies]
+serde = { workspace = true }
+cdr = "*"
